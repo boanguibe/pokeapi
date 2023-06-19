@@ -6,6 +6,7 @@ class PokemonApp {
     this.loadButton = document.getElementById('loadButton');
     this.resetButton = document.getElementById('resetButton');
     this.chartCanvas = document.getElementById('chartCanvas');
+    this.nextButton = document.getElementById('nextPokemon');
 
     this.pokemons = [];
     this.offset = 0;
@@ -13,6 +14,7 @@ class PokemonApp {
 
     this.loadButton.addEventListener('click', this.loadMorePokemons.bind(this));
     this.resetButton.addEventListener('click', this.resetPokemons.bind(this));
+    this.nextbutton.addEventListener('click', this.nextPokemon.bind(this));
   }
 
   async getPokemons() {
@@ -44,6 +46,7 @@ class PokemonApp {
       this.pokemons.push(pokemon);
     });
   }
+
 
   async displayModal(pokemon) {
     this.modalContainer.innerHTML = '';
@@ -102,9 +105,12 @@ class PokemonApp {
 
     const image = document.createElement('img');
     image.classList.add('card-img-top');
-    image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.getPokemonId(
+    image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.getPokemonId(
       pokemon.url
-    )}.png`;
+    )}.svg`;
+    // image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.getPokemonId(
+    //   pokemon.url
+    // )}.png`;
     image.alt = pokemon.name;
 
     const cardBody = document.createElement('div');
@@ -179,16 +185,26 @@ class PokemonApp {
   }
 
   async loadMorePokemons() {
+    //document.getElementById("nextPokemon").hidden = false;
+    document.getElementById('loadButton').innerHTML='Cargar mas';
+    const pokemons = await this.getPokemons();
+    this.displayPokemons(pokemons);
+    this.offset += this.limit;
+  }
+// Boton siguiente
+  async nextPokemon() {
     const pokemons = await this.getPokemons();
     this.displayPokemons(pokemons);
     this.offset += this.limit;
   }
 
   resetPokemons() {
+    document.getElementById('loadButton').innerHTML='Cargar';
     this.pokemonContainer.innerHTML = '';
     this.pokemons = [];
     this.offset = 0;
   }
 }
+
 
 const app = new PokemonApp();

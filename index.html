@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="container mt-4">
+      <h1>Pokémon App</h1>
+      <button id="loadButton" class="btn btn-primary">Cargar</button>
+      <button id="resetButton" class="btn btn-danger">Borrar</button>
+    </nav>
+
+
+    <div class="container mt-4">
+      <div id="pokemonContainer" class="row"></div>
+      <div id="modalContainer"></div>
+    </div>
+
+    <footer class="text-center">
+      <pc>Copyright &copy; 2022 - Equipo Celeste</pc>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

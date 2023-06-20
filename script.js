@@ -14,12 +14,29 @@ class PokemonApp {
 
     this.loadButton.addEventListener('click', this.loadMorePokemons.bind(this));
     this.resetButton.addEventListener('click', this.resetPokemons.bind(this));
-    this.nextbutton.addEventListener('click', this.nextPokemon.bind(this));
   }
 
+  // async getPokemons() {
+  //   try {
+  //     const response = await fetch(`${this.apiUrl}?offset=${this.offset}&limit=${this.limit}`);
+  //     const data = await response.json();
+  //     return data.results;
+  //   } catch (error) {
+  //     console.log('Error:', error);
+  //     throw new Error('Error al obtener los pokemones');
+  //   }
+  // }
   async getPokemons() {
     try {
-      const response = await fetch(`${this.apiUrl}?offset=${this.offset}&limit=${this.limit}`);
+      const fetchData = () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(fetch(`${this.apiUrl}?offset=${this.offset}&limit=${this.limit}`));
+          }, 2000);
+        });
+      };
+  
+      const response = await fetchData();
       const data = await response.json();
       return data.results;
     } catch (error) {
@@ -27,6 +44,7 @@ class PokemonApp {
       throw new Error('Error al obtener los pokemones');
     }
   }
+
 
   async getPokemonDetails(url) {
     try {
@@ -186,10 +204,11 @@ class PokemonApp {
 
   async loadMorePokemons() {
     //document.getElementById("nextPokemon").hidden = false;
-    document.getElementById('loadButton').innerHTML='Cargar mas';
+    
     const pokemons = await this.getPokemons();
     this.displayPokemons(pokemons);
     this.offset += this.limit;
+    document.getElementById('loadButton').innerHTML='Cargar mas';
   }
 // Boton siguiente
   async nextPokemon() {

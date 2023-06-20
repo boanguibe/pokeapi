@@ -203,18 +203,11 @@ class PokemonApp {
   }
 
   async loadMorePokemons() {
-    //document.getElementById("nextPokemon").hidden = false;
     
     const pokemons = await this.getPokemons();
     this.displayPokemons(pokemons);
     this.offset += this.limit;
     document.getElementById('loadButton').innerHTML='Cargar mas';
-  }
-// Boton siguiente
-  async nextPokemon() {
-    const pokemons = await this.getPokemons();
-    this.displayPokemons(pokemons);
-    this.offset += this.limit;
   }
 
   resetPokemons() {
